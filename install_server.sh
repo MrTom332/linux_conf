@@ -25,7 +25,7 @@ apt install php libapache2-mod-php
 # ethernets:
 #  enp1s0:
 #   dhcp4: no
-#   addresses: [192.168.2.10/24]
-#   gateway4: 192.168.2.254
+#   addresses: [192.168.1.25/24]
+#   gateway4: 192.168.1.201
 #   nameservers:
-#    addresses: [192.168.2.1,192.168.2.2]
+#    addresses: [200.40.30.245, 8.8.8.8]
