@@ -17,7 +17,7 @@ apt install php libapache2-mod-php
 
 
 
-## Configurar ip estatica
+## Configurar ip estatica "ifconfig -a"
 # sudo nano /etc/netplan/00-*.yaml
 #network:
 # version: 2
