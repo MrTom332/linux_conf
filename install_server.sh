@@ -9,3 +9,8 @@ mysql_secure_installation
 
 apt install php libapache2-mod-php
 
+
+
+### Configura laptop para cuando cierres la tapa no se suspenda
+# sudo nano /etc/systemd/logind.conf
+# HandleLidSwitch=ignore
