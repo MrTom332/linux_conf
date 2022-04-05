@@ -1,25 +1,38 @@
-apt list --upgradable
-apt upgrade
-apt update
-apt install apache2
-apt install mysql-server
-mysql_secure_installation
+sudo apt list --upgradable
+sudo apt upgrade
+sudo apt update
 
-#Configurar usuario root de mysql con nueva contraseña
+##########################################################################
+### Instalar apache2
 
-apt install php libapache2-mod-php
+sudo apt install apache2
+
+##########################################################################
+### Instalar mysql
+
+sudo apt install mysql-server
+sudo mysql_secure_installation
+
+# Configurar usuario root de mysql con nueva contraseña
 
 
+##########################################################################
+### Instalar php para apache2
 
+sudo apt install php libapache2-mod-php
+sudo systemctl restart apache2
+
+
+##########################################################################
 ### Configura laptop para cuando cierres la tapa no se suspenda
 # sudo nano /etc/systemd/logind.conf
 # HandleLidSwitch=ignore
 
 
-
+##########################################################################
 ## Configurar ip estatica "ifconfig -a"
 # sudo nano /etc/netplan/00-*.yaml
-#network:
+# network:
 # version: 2
 # renderer: networkd
 # ethernets:
