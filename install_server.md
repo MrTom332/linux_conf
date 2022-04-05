@@ -48,6 +48,16 @@ sudo nano /etc/netplan/00-installer-config.yaml
 network:
   ethernets:
     enp1s0:
+      dhcp4: true
+  version: 2
+```
+
+#### Tendria que quedar asi
+```
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp1s0:
       dhcp4: no
       addresses: [192.168.1.25/24]
       gateway4: 192.168.1.201
@@ -55,7 +65,6 @@ network:
         addresses: [200.40.30.245, 8.8.8.8]
   version: 2
 ```
-
 
 - dhcp4: Iria en no para desactivarlo, si lo colocamos en 'true' está activado.
 - addresses: Sería la ip de tu equipo actual.
@@ -65,23 +74,131 @@ network:
 ### 3.3. Importante❗❗
 
 Una vez echo todo lo anterior tendras que ejecutar el siguiente comando para actualizar la configuracion de red.
+
+**Asegúrate de poder volver a conectarte luego si estás en una conexión SSH**
+
 ```
 sudo netplan apply
 ```
-**Asegúrate de poder volver a conectarte luego si estás en una conexión SSH**
 
 # 4. Configurar claves RSA para la conexión SSH (Opcional)
 
 Para agregar aun más seguridad a ti conexión ssh es necesario agregar claves RSA, para esto veremos como generar estas claves e instalarlas en cualquier equipo, también como desactivar la autentificación por contraseña por ssh
 
-### 4.1 Generar el par de claves 🔐
+### 4.1. Generar el par de claves 🔐
 
 Para esto usaremos el siguiente comando (Por defecto se generarn en `~/.ssh/id_rsa` a no ser especifiques otra ruta).
 ```
 sudo ssh-keygen
 ```
 
-Una vez tengas las claves generadas es nesesario agregar una a 
+Una vez las tengas generadas es necesario agregar la clave '*.pub' al archivo '~/.ssh/authorized_keys' si no existe créalo.
+
+```
+sudo echo public_key_string >> ~/.ssh/authorized_keys
+```
+
+o
+
+```
+sudo cat id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+Con esto ya agregaste la clave a la lista de claves autorizadas!
+
+**Importante!**
+
+Recuerda que si estás en el usuario root y estás configurando este acceso para un usuario en específico la carpeta '~/.ssh' debe tener el conjunto de permisos apropiados y pertenecer al usuario en cuestión.
+
+```
+sudo chmod -R go= ~/.ssh
+sudo chown -R username:username ~/.ssh
+```
+
+### 4.2. Ahora como ingresamos desde otro equipo con esta clave ❓
+
+El otro archivo `~/.ssh/id_rsa` devemos copiarlo al equipo en cuestion que se quiera conectar a nuestro servidor.
+
+- Si estas en Linux es importante que el archivo `id_rsa` tenga permisos 400
+- Si estás en Windows tendrás que ir a propiedades y en la sección seguridad, deshabilitar la herencia, asignar solo tu usuario a la lista de permitidos y dar control total en la lista de permisos.
+
+##### 4.2.1. PowerShell
+
+Desde aquí es tan sencillo como usar el siguiente comando, recuerda cambiar la ruta por donde se encuentre tu archivo `id_rsa` y listo (Si configuraste alguna contraseña para las claves te la pedirá)
+
+```
+ssh -i "ruta\id_rsa" username@ip_servidor
+```
+
+##### 4.2.2. Putty y WinSCP
+
+Estas dos aplicaciones aunque muy buenas te pedirán tener una clave '*.ppk', pero tranquilo es muy sencillo conseguir una utilizando el programa 'Putty Key Generator' que ya deberías tener instalado si instalaste 'Putty' o 'WinSCP'.
+
+![image](https://user-images.githubusercontent.com/81438736/161854398-8f849ae0-7870-4464-b2af-b2a44608fd02.png)
+
+Harás clic en el botón load (Recuerda cambiar la búsqueda de archivos a 'All Filles (\*.\*)') y selecciona tu clave 'id_rsa' (Si configuraste alguna contraseña para las claves te la pedirá), por último clic en 'Save private key' puedes llamarla 'id_rsa_putty.ppk' y listo ya tendrás guardada tu clave como .ppk
+
+Para ingresar tu '*.ppk' en **Putty** solo tendrás que ir a ese submenú y buscarla, luego inicia normalmente como siempre.
+![image](https://user-images.githubusercontent.com/81438736/161855055-c6f8119c-72df-4cb5-9c53-a84fa8841368.png)
+
+En el caso de **WinSCP** tendrás que ir a 'Avanzado' y luego a 'Autentificación'
+![image](https://user-images.githubusercontent.com/81438736/161855176-f7cc9aee-335f-4317-9c46-e0376b949f25.png)
+
+### 4.3. Por último desactivar la autenticación con contraseña de SSH
+
+Utilizando el siguiente comando ingresaremos al archivo de configuración de ssh
+
+```
+sudo nano /etc/ssh/sshd_config
+```
+
+Una vez dentro tendras que localizar
+```
+. . .
+PasswordAuthentication no
+. . .
+```
+Verifica que la línea no quede comentada con '#' y que diga 'no', para que los cambios surtan efecto deberás resetear el SSH con el siguiente comando
+
+***(Importante: recuerda comprobar en otra terminal poder acceder con tu clave RSA antes de desactivar la autenticación por contraseña)***
+
+```
+sudo systemctl restart ssh
+```
+
+# 5. Configura laptop para cuando cierres la tapa no se suspenda (Opcional) 💻
+
+En el caso de que tu servidor sea una laptop como es mi caso, es inconveniente tener la pantalla levantada todo el rato, para evitar que el equipo se suspenda si cerramos la tapa tendremos que configurar el siguiente archivo.
+
+```
+sudo nano /etc/systemd/logind.conf
+```
+
+En él localizaremos la siguiente línea y la estableceremos en 'ignore' recuerda comprobar la línea quede des comentada.
+
+```
+HandleLidSwitch=ignore
+```
+
+Para aplicar los cambios reinicia tu equipo y listo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -107,10 +224,6 @@ sudo apt install php libapache2-mod-php
 sudo systemctl restart apache2
 
 
-##########################################################################
-### Configura laptop para cuando cierres la tapa no se suspenda
-# sudo nano /etc/systemd/logind.conf
-# HandleLidSwitch=ignore
 
 
 
