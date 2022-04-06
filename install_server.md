@@ -655,16 +655,17 @@ No es necesario hacer esto si ya instalaste el complemento y solo estás agregan
 sudo apt remove certbot
 ```
 
-Bien es momento de ahora si instalar cerbot
+
+**Bien es momento de ahora si instalar cerbot**
 
 ```
-sudo snap install --certbot clásico
+sudo snap install --classic certbot
 ```
 
 Luego de la instalación ejecute este comando para asegurarse de que cerbot se pueda ejecutar con el comando
 
 ```
-sudo ln -s /snap/bin/certbot/usr/bin/certbot
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
 ```
 
 Ahora para ejecutar cerbot y obtener un certificado tienes dos caminos, dejar que cerbot se encargue de toda la configuración de apache o pedir un certificado y tu hacer las configuraciones manualmente.
@@ -680,7 +681,7 @@ Al ejecutar este comando empezara la configuración automática, nos llevara por
 Por último con el siguiente comando se activará la renovación automática del certificado cuando este expire.
 
 ```
-sudo certbot renueva --dry-run
+sudo certbot renew --dry-run
 ```
 
 <!--############################################################################################################-->
