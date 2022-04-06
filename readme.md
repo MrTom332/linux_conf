@@ -7,6 +7,8 @@
 2. **[Primeros comandos](#2-primeros-comandos)**
    - 2.1. [Cosas importantes que tienes que saber](#21-cosas-importantes-que-tienes-que-saber)
      - 2.1.1. [Permisos](#211-permisos)
+     - 2.1.2. [Usuarios y grupos](#211-permisos)
+     - 2.1.3. [Propietario y grupo de un archivo](#211-permisos)
 3. **[Configurar ip estatica](#3-configurar-ip-estatica)**
    - 3.1. [Que ip tengo?](#31-que-ip-tengo)
    - 3.2. [Cambiar ip](#32-cambiar-ip)
@@ -121,7 +123,91 @@ Sumando estos números obtendremos toda la lista de permisos combinados, ej. que
 6. rw-
 7. rwx
 
+#### 2.1.2. Usuarios y grupos
 
+Cuando un usuario nuevo es creado se genera un grupo con su mismo nombre para ese usuario, veamos como crear usuarios, como crear grupos, como asignar grupos a usuarios y como cambiar el usuario propietario y grupo a archivos y directorios.
+
+Para crear un usuario en Linux es tan sencillo como ejecutar el siguiente comando:
+
+```
+sudo useradd nombre_usuario
+```
+
+Y para eliminar
+
+```
+sudo userdel nombre_usuario
+```
+(Puedes usar el flag `-r` para eliminar el usuario y su directorio home)
+
+Con el comando `su` y seguido el nombre de usuario podremos ingresar a este.
+
+Para modificar la contraseña de este nuevo usuario podremos hacerlo de la siguiente forma:
+
+```
+sudo passwd nombre_usuario
+```
+
+Ahora para crear un nuevo grupo podemos usar el comando:
+
+```
+sudo groupadd nombre_grupo
+```
+
+Y para eliminar
+
+```
+sudo groupdel nombre_grupo
+```
+
+Para listar los grupos de un usuario:
+
+```
+sudo groups nombre_usuario
+```
+(Si no se ingresa un nombre de usuario, listara los del actual)
+
+
+Como agregamos un grupo a un usuario? Con el siguiente comando:
+
+(***Importante!*** Recuerda que agregar o eliminar grupos solo será efectivo luego de que el usuario cierre e inicie sesión nuevamente)
+
+```
+sudo usermod -a -G nombre_grupo nombre_usuario
+```
+(Se usa el flag `-G` para especificar un grupo secundario si quieras cambiar el grupo principal de un usuario usarías `-g`)
+
+Y para eliminar a un usuario de un grupo usamos:
+
+```
+sudo gpasswd -d nombre_usuario nombre_grupo
+```
+
+#### 2.1.3. Propietario y grupo de un archivo
+
+Los archivos tienen un dueño y un grupo al cual pertenecen, Como vimos antes, los permisos para estos dos están separados, además de los permisos para el resto de usuarios, pero como cambiamos al propietario de un archivo, y su grupo
+
+Primero veremos como identificar esto en un archivo o directorio.
+
+![image](https://user-images.githubusercontent.com/81438736/161992786-3c3552a5-d8af-4011-a0da-19335cbf396c.png)
+
+- Verde: Se resalta el usuario propietario del archivo.
+- Naranja: Es a que grupo pertenece el archivo.
+
+Utilizando el siguiente comando podremos cambiar ambos o uno solo.
+
+```
+sudo chown nombre_usuario:nombre_grupo archivo_en_cuestion
+```
+(Podemos agregar el flag `-R` para que se apliquen los mismos cambios de manera recursiva a todos los ficheros en el interior si se tratase de un directorio)
+
+En el caso de solo querer cambiar el usuario, pues dejaríamos la parte de grupo en blanco, tal que así:
+
+```
+sudo chown nombre_usuario: archivo_en_cuestion
+```
+
+Y viceversa para cambiar solo el grupo
 
 [- Volver al indice -](#indice)
 <!--############################################################################################################-->
