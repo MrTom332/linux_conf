@@ -44,7 +44,7 @@
 En esta breve (pero no tanto) guía para linux veremos como instalar y configurar un servidor web junto con apache y mysql, también la configuración de ip estática y montar discos externos
 
 
-
+[- Volver al indice -](#indice)
 <!--############################################################################################################-->
 <!--############################################################################################################-->
 <!--############################################################################################################-->
