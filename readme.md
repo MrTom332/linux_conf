@@ -4,6 +4,16 @@
 ## Indice
 
 1. [Introduccion](#1-introduccion)
+2. [Primeros comandos](#2-primeros-comandos)
+3. [Configurar ip estatica](#3-configurar-ip-estatica)
+4. [Configurar claves RSA para la conexión SSH (Opcional)](#4-configurar-claves-rsa-para-la-conexión-ssh-opcional)
+5. [Configura laptop para cuando cierres la tapa no se suspenda (Opcional) 💻](#5-configura-laptop-para-cuando-cierres-la-tapa-no-se-suspenda-opcional-)
+6. [Formateo y montado de unidad externa (Opcional)](#6-formateo-y-montado-de-unidad-externa-opcional)
+7. [Instalar apache2](#7-instalar-apache2)
+8. [Instalar mysql 💾](#8-instalar-mysql-)
+9. [Instalar php para apache2](#9-instalar-php-para-apache2)
+10. [Https 🔑](#10-https-)
+11. [Fin 👏👏👏🎊🎊🎊](#11-fin-)
 
 
 <!--############################################################################################################-->
