@@ -9,7 +9,7 @@
 
 ## 1. Introduccion
 
-En esta breve guía para linux veremos como instalar y configurar un servidor web junto con apache y mysql, también la configuración de ip estática y montar discos externos
+En esta breve (pero no tanto) guía para linux veremos como instalar y configurar un servidor web junto con apache y mysql, también la configuración de ip estática y montar discos externos
 
 
 
@@ -66,7 +66,7 @@ sudo nano /etc/netplan/00-installer-config.yaml
 ```
 *(Puede tener otro nombre en tu equipo, pero la misma direccion.)*
 
-#### El archivo que encontraremos sear algo asi
+***El archivo que encontraremos sear algo asi***
 ```
 # This is the network config written by 'subiquity'
 network:
@@ -76,7 +76,7 @@ network:
   version: 2
 ```
 
-#### Tendria que quedar asi
+***Tendria que quedar asi***
 ```
 # This is the network config written by 'subiquity'
 network:
@@ -620,32 +620,78 @@ post_max_size = 8M
 Si utilizas nano recuerda que con `CRTL + W` podrás buscar, las líneas no se encuentran juntas sino en secciones separadas del archivo, aumenta el size a lo que te convenga más, importante que `post_max_size` sea siempre un poco mayor que `upload_max_filesize`.
 
 
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
 
 
 
+# 10. Https 🔑
+
+En la actualidad ya quedan muy pocos servidores que no tengan https y el nuestro no va a ser menos, tener tu propio certificado https para tu dominio es muy sencillo y gratuito gracias a la herramienta certbot, pero como se usa? Esta es la mejor parte en la propia página de certbot encontrarás un instructivo de como se instala y se automatiza, aquí te escribiré los puntos importantes y por arriba
+
+Primero que nada necesitarás instalar `snapd` es un sistema de implementación y empaquetado de software desarrollado por Canonical para sistemas operativos que utilizan el kernel de Linux, lo más seguro es que si estás utilizando las últimas versiones de Ubuntu ya venga instalado, es fácil de saber ejecutado el siguiente comando.
+
+```
+sudo snap --version
+```
+
+Si no lo llegas a tener instalado puedes buscar como en su web [-Instalar snapd-](https://snapcraft.io/docs/installing-snapd)
+
+Ejecuta los siguientes comandos para asegurarte tienes la última versión
+
+```
+sudo snap install core; sudo snap refresh core
+```
+
+***Importante!!!***
+
+Si llegaras a tener una previa instalación de cerbot deberás eliminarla para que se use el complemento y no la instalación
+
+No es necesario hacer esto si ya instalaste el complemento y solo estás agregando un nuevo certificado
+
+```
+sudo apt remove certbot
+```
+
+Bien es momento de ahora si instalar cerbot
+
+```
+sudo snap install --certbot clásico
+```
+
+Luego de la instalación ejecute este comando para asegurarse de que cerbot se pueda ejecutar con el comando
+
+```
+sudo ln -s /snap/bin/certbot/usr/bin/certbot
+```
+
+Ahora para ejecutar cerbot y obtener un certificado tienes dos caminos, dejar que cerbot se encargue de toda la configuración de apache o pedir un certificado y tu hacer las configuraciones manualmente.
+
+En lo personal he probado lo suficiente el modo automático como para sentirme cómodo utilizándolo, no veo la necesidad de hacer la configuración manualmente.
+
+```
+sudo certbot --apache
+```
+
+Al ejecutar este comando empezara la configuración automática, nos llevara por una serie de preguntas que deberemos completar y listo ya tendremos nuestro certificado instalado, ahora solo queda comprobarlo en el navegador!
+
+Por último con el siguiente comando se activará la renovación automática del certificado cuando este expire.
+
+```
+sudo certbot renueva --dry-run
+```
+
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
 
 
 
+# 11. Fin 👏👏👏🎊🎊🎊
 
+Si pudiste seguir todos los pasos, felicidades amigos mío ya tienes un buen servidor linux en tus manos!!
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Hasta otra 🖖
