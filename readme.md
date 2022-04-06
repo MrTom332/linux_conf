@@ -3,8 +3,8 @@
 
 ## Indice
 
-1. [Introduccion](#1-introduccion)
-2. [Primeros comandos](#2-primeros-comandos)
+1. **[Introduccion](#1-introduccion)**
+2. **[Primeros comandos](#2-primeros-comandos)**
 3. [Configurar ip estatica](#3-configurar-ip-estatica)
    - 3.1. [Que ip tengo?](#31-que-ip-tengo)
    - 3.2. [Cambiar ip](#32-cambiar-ip)
