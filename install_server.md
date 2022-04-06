@@ -90,7 +90,7 @@ network:
   version: 2
 ```
 
-- dhcp4: Iria en no para desactivarlo, si lo colocamos en 'true' está activado.
+- dhcp4: Iria en no para desactivarlo, si lo colocamos en `true` está activado.
 - addresses: Sería la ip de tu equipo actual.
 - gateway4: La puerta de enlace predeterminado.
 - nameservers: Lista de DNS.
@@ -123,7 +123,7 @@ Para esto usaremos el siguiente comando (Por defecto se generarn en `~/.ssh/id_r
 sudo ssh-keygen
 ```
 
-Una vez las tengas generadas es necesario agregar la clave '*.pub' al archivo '~/.ssh/authorized_keys' si no existe créalo.
+Una vez las tengas generadas es necesario agregar la clave `*.pub` al archivo `~/.ssh/authorized_keys` si no existe créalo.
 
 ```
 sudo echo public_key_string >> ~/.ssh/authorized_keys
@@ -139,7 +139,7 @@ Con esto ya agregaste la clave a la lista de claves autorizadas!
 
 **Importante!**
 
-Recuerda que si estás en el usuario root y estás configurando este acceso para un usuario en específico la carpeta '~/.ssh' debe tener el conjunto de permisos apropiados y pertenecer al usuario en cuestión.
+Recuerda que si estás en el usuario root y estás configurando este acceso para un usuario en específico la carpeta `~/.ssh` debe tener el conjunto de permisos apropiados y pertenecer al usuario en cuestión.
 
 ```
 sudo chmod -R go= ~/.ssh
@@ -163,16 +163,16 @@ ssh -i "ruta\id_rsa" username@ip_servidor
 
 ##### 4.2.2. Putty y WinSCP
 
-Estas dos aplicaciones aunque muy buenas te pedirán tener una clave '*.ppk', pero tranquilo es muy sencillo conseguir una utilizando el programa 'Putty Key Generator' que ya deberías tener instalado si instalaste 'Putty' o 'WinSCP'.
+Estas dos aplicaciones aunque muy buenas te pedirán tener una clave `*.ppk`, pero tranquilo es muy sencillo conseguir una utilizando el programa `Putty Key Generator` que ya deberías tener instalado si instalaste `Putty` o `WinSCP`.
 
 ![image](https://user-images.githubusercontent.com/81438736/161854398-8f849ae0-7870-4464-b2af-b2a44608fd02.png)
 
-Harás clic en el botón load (Recuerda cambiar la búsqueda de archivos a 'All Filles (\*.\*)') y selecciona tu clave 'id_rsa' (Si configuraste alguna contraseña para las claves te la pedirá), por último clic en 'Save private key' puedes llamarla 'id_rsa_putty.ppk' y listo ya tendrás guardada tu clave como .ppk
+Harás clic en el botón load (Recuerda cambiar la búsqueda de archivos a `All Filles (\*.\*)`) y selecciona tu clave `id_rsa` (Si configuraste alguna contraseña para las claves te la pedirá), por último clic en `Save private key` puedes llamarla `id_rsa_putty.ppk` y listo ya tendrás guardada tu clave como .ppk
 
-Para ingresar tu '*.ppk' en **Putty** solo tendrás que ir a ese submenú y buscarla, luego inicia normalmente como siempre.
+Para ingresar tu `*.ppk` en **Putty** solo tendrás que ir a ese submenú y buscarla, luego inicia normalmente como siempre.
 ![image](https://user-images.githubusercontent.com/81438736/161855055-c6f8119c-72df-4cb5-9c53-a84fa8841368.png)
 
-En el caso de **WinSCP** tendrás que ir a 'Avanzado' y luego a 'Autentificación'
+En el caso de **WinSCP** tendrás que ir a `Avanzado` y luego a `Autentificación`
 ![image](https://user-images.githubusercontent.com/81438736/161855176-f7cc9aee-335f-4317-9c46-e0376b949f25.png)
 
 ### 4.3. Por último desactivar la autenticación con contraseña de SSH
@@ -189,7 +189,7 @@ Una vez dentro tendras que localizar
 PasswordAuthentication no
 . . .
 ```
-Verifica que la línea no quede comentada con '#' y que diga 'no', para que los cambios surtan efecto deberás resetear el SSH con el siguiente comando
+Verifica que la línea no quede comentada con `#` y que diga `no`, para que los cambios surtan efecto deberás resetear el SSH con el siguiente comando
 
 ***(Importante: recuerda comprobar en otra terminal poder acceder con tu clave RSA antes de desactivar la autenticación por contraseña)***
 
@@ -212,7 +212,7 @@ En el caso de que tu servidor sea una laptop como es mi caso, es inconveniente t
 sudo nano /etc/systemd/logind.conf
 ```
 
-En él localizaremos la siguiente línea y la estableceremos en 'ignore' recuerda comprobar la línea quede des comentada.
+En él localizaremos la siguiente línea y la estableceremos en `ignore` recuerda comprobar la línea quede des comentada.
 
 ```
 HandleLidSwitch=ignore
@@ -230,7 +230,7 @@ Para aplicar los cambios reinicia tu equipo y listo.
 
 
 
-# 6. Formateo y montado de unidad externa
+# 6. Formateo y montado de unidad externa (Opcional)
 
 Un buen servidor siempre debe tener almacenamiento suficiente para la información, de preferencia todo en un RAID 1 o superior, pero como hacemos que Linux reconozca este dispositivo que ingresamos? 💽
 
@@ -275,13 +275,13 @@ fdisk /dev/sdb1
 
 Este comando te abrirá una interfaz en el que podrás interactuar con letras y realizar acciones.
 
-- p: Te permitirá imprimir en pantalla la tabla de particiones actuales.
-- d: Te permitirá eliminar una partición.
-- n: Te permitirá crear una nueva partición.
-- t: Te permitirá cambiar el tipo de sistema de fichero (Código 83 es el identificador de los sistemas Linux).
-- w: Para finalizar y guardar los cambios.
+- **p**: Te permitirá imprimir en pantalla la tabla de particiones actuales.
+- **d**: Te permitirá eliminar una partición.
+- **n**: Te permitirá crear una nueva partición.
+- **t**: Te permitirá cambiar el tipo de sistema de fichero (Código 83 es el identificador de los sistemas Linux).
+- **w**: Para finalizar y guardar los cambios.
 
-El proceso es muy sencillo, si estás realizando un disco para guardar información, primero elimina todas las particiones con la opción 'd', a continuación crea una única partición primaria con 'n' (Te saldrán algunas preguntas, si das enter dejando todo en blanco se configurara por default), con 't' cambias el tipo de sistema de fichero a 83 y para finalizar 'w' para guardar los cambios y salir.
+El proceso es muy sencillo, si estás realizando un disco para guardar información, primero elimina todas las particiones con la opción `d`, a continuación crea una única partición primaria con `n` (Te saldrán algunas preguntas, si das enter dejando todo en blanco se configurara por default), con `t` cambias el tipo de sistema de fichero a 83 y para finalizar `w` para guardar los cambios y salir.
 
 Ahora para poder formatear esta nueva partición que creamos simplemente usamos: (Recuerda colocar la ruta a la partición de tu disco y no al disco en sí)
 ```
@@ -341,19 +341,19 @@ Y listo, al reiniciar el equipo, tu unidad se montará automáticamente al inici
 
 # 7. Instalar apache2
 
-Para que nuestro equipo se transforme en un servidor web echo y derecho necesitamos un programa que nos haga de servidor web, en este caso apache2.
+Para que nuestro equipo se transforme en un servidor web echo y derecho necesitamos un programa que nos haga de servidor web, en este caso apache2, también instalaremos apache2-utils es un paquete de programas que son útiles para cualquier servidor web.
 
 Para instalarlo simplemente ejecutamos el siguiente comando:
 
 ```
-sudo apt install apache2
+sudo apt install apache2 apache2-utils
 ```
 
 Y listo así de sencillo ya tenemos un servidor web.
 
 ### 7.1. Logs (OPCIONAL)
 
-Como puede que sepas apache guarda un registro de cada conexión que recibe y cada error que pueda producirse, es lo que se conoce como archivo log, en el caso de apache estos archivos por default están en '/var/log/apache2/\*', en sí mismo no es un problema dejarlos acá, pero si tenemos un servidor que registra muchas peticiones capas es conveniente guardar estos logs en un disco externo, la ruta de los log está en el siguiente archivo:
+Como puede que sepas apache guarda un registro de cada conexión que recibe y cada error que pueda producirse, es lo que se conoce como archivo log, en el caso de apache estos archivos por default están en `/var/log/apache2/\*`, en sí mismo no es un problema dejarlos acá, pero si tenemos un servidor que registra muchas peticiones capas es conveniente guardar estos logs en un disco externo, la ruta de los log está en el siguiente archivo:
 
 ```
 sudo nano /etc/apache2/envvars
@@ -376,7 +376,44 @@ sudo nano /etc/apache2/apache2.conf
 
 ![image](https://user-images.githubusercontent.com/81438736/161871364-97e12f3f-a2dd-43a5-b14a-8da45ae3db39.png)
 
-Una vez en el archivo de configuración de apache localizarás la sección que dice '<Directory /var/www/&gt;' el contenido de esta carpeta es el que apache expone al puerto 80, en el renglón inferior encontraremos que dirá 'Options Indexes FollowSymLinks' tendrás que borrar 'Indexes' para que te quede como en la imagen.
+Una vez en el archivo de configuración de apache localizarás la sección que dice `<Directory /var/www/&gt;` el contenido de esta carpeta es el que apache expone al puerto 80, en el renglón inferior encontraremos que dirá `Options Indexes FollowSymLinks` tendrás que borrar `Indexes` para que te quede como en la imagen.
+
+Por último recuerda reiniciar apache para aplicar los cambios.
+```
+sudo systemctl restart apache2
+```
+
+### 7.3. Instalacion y configuracion de ModEvasive (OPCIONAL PERO NO TANTO)
+
+Tener proteccion contra posibles ataque DoS, DDoS y de fuerza bruta nunca esta demas, este módulo creara una tabla hash de direcciones IP y URI con la cual supervisara las solicitudes entrantes al servidor y bloqueara aquellas sospechosas.
+
+Para instalar este módulo ejecutaremos el siguiente comando:
+
+```
+sudo apt install libapache2-mod-evasive
+```
+
+Durante la instalación se le pedirá que configure un servidor de correo para recibir notificaciones, elijan la opción que desean.
+
+Muy bien, ahora ya puede configurar mod-evasive yendo a su archivo de configuración.
+
+```
+sudo nano /etc/apache2/mods-enabled/evasive.conf
+```
+
+![image](https://user-images.githubusercontent.com/81438736/161874115-5fb04662-18de-4b59-8b11-56bc0d680e9e.png)
+
+Aquí puede configurar una ruta para los archivos log y el resto de parámetros.
+
+- **DOSHashTableSize**: Se especifica el tamaño de la tabla hash.
+- **DOSPageCount**: Cantidad de solicitudes permitidas por segundo de un mismo URI.
+- **DOSSiteCount**: Numero maximo de solicitudes permitidas por una Ip.
+- **DOSPageInterval**: Intervalo de recuento de páguinas.
+- **DOSSiteInterval**: Intervalo de recuento de sitios.
+- **DOSBlockingPeriod**: Tiempo en segundo que un cliente será bloqueado.
+- **DOSEmailNotify**: Correo electrónico al que avisar cuando una Ip sea bloqueada.
+- **DOSSystemCommand**: Comando que se ejecutara cuando una Ip sea bloqueada.
+- **DOSLogDir**: Directorio para logs.
 
 Por último recuerda reiniciar apache para aplicar los cambios.
 ```
@@ -384,13 +421,171 @@ sudo systemctl restart apache2
 ```
 
 
-##########################################################################
-### Instalar mysql
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
 
+
+
+# 8. Instalar mysql 💾
+
+Todo buen servidor necesitara una base de datos para guardar y gestionar información (Puede que tu servidor no lo necesite si solo muestra imágenes o algo así, pero nunca esta demás)
+
+```
 sudo apt install mysql-server
-sudo mysql_secure_installation
+```
 
-# Configurar usuario root de mysql con nueva contraseña
+Una vez instalado pasaremos a ejecutar el siguiente comando para configurarlo
+
+```
+sudo mysql_secure_installation
+```
+
+Ejecutando esto tendrán una serie de preguntas para establecer algunos parámetros de la instalación, tan sencillo como seguir los pasos y configurarlo a tu gusto.
+
+### 8.1. Ajustar autenticación y privilegios de usuarios (OPCIONAL)
+
+Por defecto, el usuario root de MySQL se configura para la autenticación usando el complemento `auth_socket` y no una contraseña, lo que aporta mayor seguridad, pero presenta complicaciones cuando queremos que un programa externo ingrese a este usuario.
+
+Para ingresar como root en MySQL deberemos cambiar su método de autenticación de `auth_socket` a otro complemento como `caching_sha2_password` o `mysql_native_password`.
+
+Que elegir? `caching_sha2_password` es la opcion pereferida por MySQL proporciona un cifrado de contraseña mas seguro, pero muchas aplicaciones PHP no funcionan de forma fiable con `caching_sha2_password` asi que se recomienda usar `mysql_native_password` si es que trabajas con PHP
+
+Para hacer esto primero entraremos a mysql desde la terminal:
+
+```
+sudo mysql
+```
+
+Con la siguiente sentencia podremos ver la lista de usuarios y sus plugins
+
+```
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+```
+
+Y con la siguiente sentencia cambiaremos este plugin y estableceremos una contraseña:
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';
+```
+
+o
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+```
+
+Al finalizar ejecuta el siguiente comando para volver a cargar la tabla de permisos y aplicar los nuevos cambios;
+
+```
+FLUSH PRIVILEGES;
+```
+
+### 8.2. Ajustar nivel de validación de contraseña (OPCIONAL)
+
+Si tienes un servidor mysql local sin salida a la red es posible quieras tener una contraseña corta para tu usuario MySQL, un error que puede pasarte al intentar establecer esta contraseña es: `ERROR 1819 (HY000): Your password does not satisfy the current policy requirements.` como arreglamos esto? Primero ingresa a mysql
+
+Con la siguiente sentencia podrás ver el nivel actual de validación de contraseñas
+
+```
+SHOW VARIABLES LIKE 'validate_password%';
+```
+
+Y con la siguiente sentencia cambiar este nivel a LOW
+
+```
+SET GLOBAL validate_password.policy = 0;
+```
+
+Si su contraseña aún no cumple los criterios mínimos (No recomiendo hacer esto) pero puede deshabilitar la validación con la siguiente sentencia (Dentro de MySQL).
+
+```
+UNINSTALL COMPONENT "file://component_validate_password";
+```
+
+Ahora puede crear su usuario y luego volver a activar el complemento
+
+```
+INSTALL COMPONENT "file://component_validate_password";
+```
+
+### 8.3. Cambiar carpeta de guardado para las bases de datos (OPCIONAL)
+
+Si usted cuenta con un disco externo de RAID 1 muy probablemente quiera que la información sensible como lo son las base de datos se guarden en este, veamos como hacerlo.
+
+Primero que nada detendremos el servicio MySQL y AppArmor si lo tenemos instalado.
+
+AppArmor es un módulo de seguridad del Kernel Linux que permite al administrador del sistema restringir las capacidades de un programa, en conclucion, si queremos que el programa MySQL tenga alcance a su nueva carpeta deberemos ajustar las reglas en AppArmor.
+
+```
+sudo systemctl stop mysql
+```
+```
+sudo systemctl stop apparmor
+```
+
+Moveremos todos los archivos de MySQL a la nueva ubicación que deseamos, por defecto los archivos de base de datos de MySQL en Ubuntu están en `/var/lib/mysql/`, una vez tengamos todo en la nueva dirección procederemos a cambiar el nombre a la carpeta original por algo así `/var/lib/mysql_safe` hacemos esto por si fuera necesario regresar a la configuración anterior luego.
+
+```
+sudo cp /var/lib/mysql_safe /nueva/ruta/mysql
+```
+
+Es importante que esta nueva carpeta tenga los permisos apropiados y el dueño sea MySQL
+
+```
+sudo chown -R mysql:mysql /nueva/ruta/mysql
+```
+```
+sudo chmod -R 700 /nueva/ruta/mysql
+```
+
+En esta nueva carpeta debeos borrar ciertos archivos logs
+
+```
+sudo rm /nueva/ruta/mysql/ib_logfile*
+```
+
+Ahora iremos al archivo de configuración de MySQL e indicaremos la nueva ruta:
+
+```
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+![image](https://user-images.githubusercontent.com/81438736/161881065-e813b5a4-a57e-4dea-89f2-fd06aa1294af.png)
+
+Modificaremos 'datadir' con nuestra nueva dirección.
+
+Como mencione antes debemos modificar la configuración de AppArmor, vamos a editar o crear en caso de que no exista el siguiente archivo:
+
+```
+sudo nano /etc/apparmor.d/local/usr.sbin.mysqld
+```
+
+Dentro de este pondremos las siguientes líneas
+
+```
+/nueva/ruta/mysql/ r,
+/nueva/ruta/mysql/** rwk,
+```
+
+Por último iniciamos AppArmor y MySQL
+
+```
+sudo service apparmor start
+```
+```
+sudo systemctl start mysql
+```
+
+Si hicimos todo correctamente debería iniciarse sin problemas
+
+
+
+
+
+
+
 
 
 ##########################################################################
