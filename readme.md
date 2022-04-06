@@ -115,6 +115,7 @@ network:
   ethernets:
     enp1s0:
       dhcp4: no
+      optional: true
       addresses: [192.168.1.25/24]
       gateway4: 192.168.1.201
       nameservers:
@@ -126,6 +127,7 @@ network:
 - addresses: Sería la ip de tu equipo actual.
 - gateway4: La puerta de enlace predeterminado.
 - nameservers: Lista de DNS.
+- optional: Colocamos esta opción en true para que al iniciar el equipo no quede esperando a tener conexión.
 
 ### 3.3. Importante❗
 
@@ -299,10 +301,10 @@ En el caso que tu disco este montado, utiliza el siguiente comando para desmonta
 sudo umount /dev/sdb1
 ```
 
-Ahora si, para iniciar el particionamiento de nuestro disco, utiliza el siguiente comando.
+Ahora si, para iniciar el particionamiento de nuestro disco, utiliza el siguiente comando. (Comprueba estar particionando tu disco y no una partición)
 
 ```
-fdisk /dev/sdb1
+fdisk /dev/sdb
 ```
 
 Este comando te abrirá una interfaz en el que podrás interactuar con letras y realizar acciones.
