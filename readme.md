@@ -69,6 +69,57 @@ sudo apt update
 
 Una vez ejecutado estos comandos podremos dar comienzo 🚀
 
+### 2.1. Cosas importantes que tienes que saber
+
+A continuacion veremos algunos comandos basicos que estaremos usando y algunas otras cosas.
+
+#### 2.1.1. Permisos
+
+Saber reconocer que permisos tiene una carpeta o archivo es tan importante como saber darlos, aquí un breve repaso a este tema.
+
+Para poder ver los permisos de un archivo o directorio debes usar el siguiente comando:
+
+```
+ls -l
+```
+
+Al comando ls normal le agregamos el flag `-l` para ver una lista detallada de todo, también podemos agregar `-a` para ver los archivos ocultos
+
+![image](https://user-images.githubusercontent.com/81438736/161981333-b7adbc51-c836-4a72-80cc-1be9232fa17e.png)
+
+Ahora repasemos lo que vemos en esta imagen, como puedes ver resalte con colores lo importante, el primer `-` que está al principio indica que esto es un archivo, si tuviéramos una `d` sería un directorio, los permisos se dividen en conjuntos de 3 que resalte con colores.
+
+- Verde: Los primeros son los permisos del usuario propietario del archivo.
+- Naranja: Los siguientes son permisos para el grupo del archivo.
+- Amarillo: Por último los permisos para cualquier otra persona.
+
+Definimos los permisos para cada sección con la letra que corresponda o la ausencia de ella, en ese caso colocamos un `-`, el orden siempre es el mismo, primero `r` permisos de lectura, `w` permisos de escritura y por último `x` permisos de ejecución.
+
+Para cambiar los permisos de un archivo o directorio usamos el siguiente comando:
+
+```
+sudo chmod 664 /archivo/en/cuestion
+```
+
+(Podemos agregar el flag `-R` para que en el caso de un directorio los permisos se agreguen de forma recursiva a todo su contenido)
+
+Como identificar los números y saber que conjunto de permisos estamos dando? Muy fácil, lo aremos sumando los siguientes números que te mostraré a continuación.
+
+4 - Lectura
+2 - Escritura
+1 - Ejecución
+
+Sumando estos números obtendremos toda la lista de permisos combinados, ej. queremos permisos de lectura y escritura pues sumaremos 4 + 2 lo que nos dará 6
+
+1. --x
+2. -w-
+3. -wx
+4. r--
+5. r-x
+6. rw-
+7. rwx
+
+
 
 [- Volver al indice -](#indice)
 <!--############################################################################################################-->
@@ -349,7 +400,7 @@ Fantastico!!
 
 ***Importante!!***
 
-Cuando se reinicie nuestro equipo, este disco tendrás que volver a montarlo a la misma carpeta, para facilitarnos la vida vamos a ingresar la línea de montado en el archivo Fstab del sistema (Este es el archivo de configuración de Linux en el que se registran las particiones que deben montarse al iniciarse. Por esto si tu equipo arranca y luego le conectas ti dispositivo no se montara automáticamente a no ser que reinicies o lo hagas manualmente)
+Cuando se reinicie nuestro equipo, este disco tendrás que volver a montarlo a la misma carpeta, para facilitarnos la vida vamos a ingresar la línea de montado en el archivo **Fstab** del sistema (Este es el archivo de configuración de Linux en el que se registran las particiones que deben montarse al iniciarse. Por esto si tu equipo arranca y luego le conectas ti dispositivo no se montara automáticamente a no ser que reinicies o lo hagas manualmente)
 
 
 ```
