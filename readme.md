@@ -7,8 +7,8 @@
 2. **[Primeros comandos](#2-primeros-comandos)**
    - 2.1. [Cosas importantes que tienes que saber](#21-cosas-importantes-que-tienes-que-saber)
      - 2.1.1. [Permisos](#211-permisos)
-     - 2.1.2. [Usuarios y grupos](#211-permisos)
-     - 2.1.3. [Propietario y grupo de un archivo](#211-permisos)
+     - 2.1.2. [Usuarios y grupos](#212-usuarios-y-grupos)
+     - 2.1.3. [Propietario y grupo de un archivo](#213-propietario-y-grupo-de-un-archivo)
 3. **[Configurar ip estatica](#3-configurar-ip-estatica)**
    - 3.1. [Que ip tengo?](#31-que-ip-tengo)
    - 3.2. [Cambiar ip](#32-cambiar-ip)
