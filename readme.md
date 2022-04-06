@@ -87,7 +87,7 @@ Para poder ver los permisos de un archivo o directorio debes usar el siguiente c
 ls -l
 ```
 
-Al comando ls normal le agregamos el flag `-l` para ver una lista detallada de todo, también podemos agregar `-a` para ver los archivos ocultos
+Al comando `ls` normal le agregamos el flag `-l` para ver una lista detallada de todo, también podemos agregar `-a` para ver los archivos ocultos
 
 ![image](https://user-images.githubusercontent.com/81438736/161981333-b7adbc51-c836-4a72-80cc-1be9232fa17e.png)
 
