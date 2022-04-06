@@ -8,7 +8,7 @@
 3. [Configurar ip estatica](#3-configurar-ip-estatica)
    - 3.1. [Que ip tengo?](#31-que-ip-tengo)
    - 3.2. [Cambiar ip](#32-cambiar-ip)
-   - 3.3. [Importante❗❗](#33-importante)
+   - 3.3. [Importante❗](#33-importante)
 4. [Configurar claves RSA para la conexión SSH (Opcional)](#4-configurar-claves-rsa-para-la-conexión-ssh-opcional)
    - 4.1. [Generar el par de claves 🔐](#41-generar-el-par-de-claves-)
    - 4.2. [Ahora como ingresamos desde otro equipo con esta clave ❓](#42-ahora-como-ingresamos-desde-otro-equipo-con-esta-clave-)
@@ -118,7 +118,7 @@ network:
 - gateway4: La puerta de enlace predeterminado.
 - nameservers: Lista de DNS.
 
-### 3.3. Importante❗❗
+### 3.3. Importante❗
 
 Una vez echo todo lo anterior tendras que ejecutar el siguiente comando para actualizar la configuracion de red.
 
