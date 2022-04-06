@@ -1,8 +1,23 @@
 # Configuracion de un buen servidor linux
 
+
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+
+
 ## 1. Introduccion
 
 En esta breve guía para linux veremos como instalar y configurar un servidor web junto con apache y mysql, también la configuración de ip estática y montar discos externos
+
+
+
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+
 
 ## 2. Primeros comandos
 
@@ -21,6 +36,15 @@ sudo apt update
 ```
 
 Una vez ejecutado estos comandos podremos dar comienzo 🚀
+
+
+
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+
+
 
 ## 3. Configurar ip estatica
 
@@ -80,6 +104,13 @@ Una vez echo todo lo anterior tendras que ejecutar el siguiente comando para act
 ```
 sudo netplan apply
 ```
+
+
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+
 
 # 4. Configurar claves RSA para la conexión SSH (Opcional)
 
@@ -166,6 +197,13 @@ Verifica que la línea no quede comentada con '#' y que diga 'no', para que los 
 sudo systemctl restart ssh
 ```
 
+
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+
+
 # 5. Configura laptop para cuando cierres la tapa no se suspenda (Opcional) 💻
 
 En el caso de que tu servidor sea una laptop como es mi caso, es inconveniente tener la pantalla levantada todo el rato, para evitar que el equipo se suspenda si cerramos la tapa tendremos que configurar el siguiente archivo.
@@ -185,28 +223,166 @@ Para aplicar los cambios reinicia tu equipo y listo.
 
 
 
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
 
 
 
+# 6. Formateo y montado de unidad externa
+
+Un buen servidor siempre debe tener almacenamiento suficiente para la información, de preferencia todo en un RAID 1 o superior, pero como hacemos que Linux reconozca este dispositivo que ingresamos? 💽
+
+Primero usaremos el comando siguiente para ver la lista de discos y particiones conectadas.
+
+```
+sudo fdisk -l
+```
+
+![image](https://user-images.githubusercontent.com/81438736/161866415-4855fd6d-123b-46ce-a25c-ecfd6928aa1c.png)
+
+
+***IMPORTANTE!!***
+
+Debes saber diferenciar cuál es la ruta al disco y cuál es la partición, en este caso con verde resalte la ruta al disco y con amarillo la partición de este disco. (Si bien puedes guardar información en un disco sin particionar no es recomendable).
+
+También es posible que si tu disco es nuevo no tengas creada una particion, por lo que la tabla en amarillo no te saldría.
+
+Si encuentras una tabla de peticiones que tiene varios registros cuidado!, esa probablemente sea la tabla de peticiones del sistema, no debes tocar eso, para los discos externos se genera una nueva tabla en la parte inferior.
+
+
+### 6.1. Como formateo mi disco?
+
+Primero antes de arrancar es necesario saber si tu disco está montado en alguna carpeta, para esto usaras el comando a continuación te devolverá una lista de rutas de particiones, en que carpetas están montadas y cuanta capacidad del disco ha sido utilizada.
+
+```
+sudo df
+```
+
+En el caso que tu disco este montado, utiliza el siguiente comando para desmontar la unidad.
+
+
+```
+sudo umount /dev/sdb1
+```
+
+Ahora si, para iniciar el particionamiento de nuestro disco, utiliza el siguiente comando.
+
+```
+fdisk /dev/sdb1
+```
+
+Este comando te abrirá una interfaz en el que podrás interactuar con letras y realizar acciones.
+
+- p: Te permitirá imprimir en pantalla la tabla de particiones actuales.
+- d: Te permitirá eliminar una partición.
+- n: Te permitirá crear una nueva partición.
+- t: Te permitirá cambiar el tipo de sistema de fichero (Código 83 es el identificador de los sistemas Linux).
+- w: Para finalizar y guardar los cambios.
+
+El proceso es muy sencillo, si estás realizando un disco para guardar información, primero elimina todas las particiones con la opción 'd', a continuación crea una única partición primaria con 'n' (Te saldrán algunas preguntas, si das enter dejando todo en blanco se configurara por default), con 't' cambias el tipo de sistema de fichero a 83 y para finalizar 'w' para guardar los cambios y salir.
+
+Ahora para poder formatear esta nueva partición que creamos simplemente usamos: (Recuerda colocar la ruta a la partición de tu disco y no al disco en sí)
+```
+sudo mkfs.ext4 /dev/sdb1
+```
+
+Listo!!
+
+### 6.2. Como montar esta nueva unidad en una carpeta?
+
+Esta es la parte más sencilla, primero seleccionaremos en que carpeta queremos montar nuestra unidad, en mi caso crearé una.
+
+```
+sudo mkdir /media/discoduro
+```
+
+Y ahora para montar el disco simplemente usamos: (Recuerda cambiar las rutas por las que correspondan en tu caso)
+
+```
+mount /dev/sdb1 /media/discoduro
+```
+
+Puedes comprobar de manera sencilla si el disco quedo montado con el siguiente comando:
+
+```
+sudo df
+```
+![image](https://user-images.githubusercontent.com/81438736/161868903-967346ee-53cd-460b-bcc1-b1bb76a0de41.png)
+
+Fantastico!!
+
+***Importante!!***
+
+Cuando se reinicie nuestro equipo, este disco tendrás que volver a montarlo a la misma carpeta, para facilitarnos la vida vamos a ingresar la línea de montado en el archivo Fstab del sistema (Este es el archivo de configuración de Linux en el que se registran las particiones que deben montarse al iniciarse. Por esto si tu equipo arranca y luego le conectas ti dispositivo no se montara automáticamente a no ser que reinicies o lo hagas manualmente)
+
+
+```
+sudo nano /etc/fstab
+```
+
+Agregaras al final del archivo
+
+```
+/dev/sdb1       /media/discoduro       ext4      rw,nouser,dev,exec,auto 0 0
+```
+
+Y listo, al reiniciar el equipo, tu unidad se montará automáticamente al inicio.
 
 
 
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
 
 
 
+# 7. Instalar apache2
 
+Para que nuestro equipo se transforme en un servidor web echo y derecho necesitamos un programa que nos haga de servidor web, en este caso apache2.
 
+Para instalarlo simplemente ejecutamos el siguiente comando:
 
-
-
-
-
-
-
-##########################################################################
-### Instalar apache2
-
+```
 sudo apt install apache2
+```
+
+Y listo así de sencillo ya tenemos un servidor web.
+
+### 7.1. Logs (OPCIONAL)
+
+Como puede que sepas apache guarda un registro de cada conexión que recibe y cada error que pueda producirse, es lo que se conoce como archivo log, en el caso de apache estos archivos por default están en '/var/log/apache2/\*', en sí mismo no es un problema dejarlos acá, pero si tenemos un servidor que registra muchas peticiones capas es conveniente guardar estos logs en un disco externo, la ruta de los log está en el siguiente archivo:
+
+```
+sudo nano /etc/apache2/envvars
+```
+
+![image](https://user-images.githubusercontent.com/81438736/161870504-ded60379-1a67-4e16-a766-85c1c34d1c95.png)
+
+Por último recuerda reiniciar apache para aplicar los cambios.
+```
+sudo systemctl restart apache2
+```
+
+### 7.2. Listado de directorios (OPCIONAL)
+
+En la configuración default de apache, si alguien ingresa a una carpeta desde la web este devolverá una lista de todo lo que contiene, en ambiente de producción esto no es nada seguro, así que veamos como desactivarlo.
+
+```
+sudo nano /etc/apache2/apache2.conf
+```
+
+![image](https://user-images.githubusercontent.com/81438736/161871364-97e12f3f-a2dd-43a5-b14a-8da45ae3db39.png)
+
+Una vez en el archivo de configuración de apache localizarás la sección que dice '<Directory /var/www/&gt;' el contenido de esta carpeta es el que apache expone al puerto 80, en el renglón inferior encontraremos que dirá 'Options Indexes FollowSymLinks' tendrás que borrar 'Indexes' para que te quede como en la imagen.
+
+Por último recuerda reiniciar apache para aplicar los cambios.
+```
+sudo systemctl restart apache2
+```
+
 
 ##########################################################################
 ### Instalar mysql
