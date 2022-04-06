@@ -581,18 +581,69 @@ sudo systemctl start mysql
 Si hicimos todo correctamente debería iniciarse sin problemas
 
 
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
+<!--############################################################################################################-->
 
 
 
+# 9. Instalar php para apache2
 
+En este caso yo soy un fan incondicional de PHP así que para mi servidor usaré esto jaja, la instalación es rápida y sencilla
 
-
-
-##########################################################################
-### Instalar php para apache2
-
+```
 sudo apt install php libapache2-mod-php
+```
+
+Recuerda es necesario reiniciar apache para que PHP empiece a funcionar
+
+```
 sudo systemctl restart apache2
+```
+
+### 9.1. Aumentar buffer para archivos de subida y POST (OPCIONAL)
+
+Si piensas permitir que se suban archivos a tu servidor a través de PHP, seguramente con el máximo tamaño permitido por default te quede un poco corto, así que veamos como solucionar eso. (La idea es entrar a `php.ini puede que tu ruta sea distinta dependiendo la versión de PHP entre otras cosas
+
+```
+sudo nano /etc/php/7.4/apache2/php.ini
+```
+
+Una vez dentro del archivo de configuración debemos localizar las siguientes líneas:
+
+```
+upload_max_filesize = 2M
+post_max_size = 8M
+```
+
+Si utilizas nano recuerda que con `CRTL + W` podrás buscar, las líneas no se encuentran juntas sino en secciones separadas del archivo, aumenta el size a lo que te convenga más, importante que `post_max_size` sea siempre un poco mayor que `upload_max_filesize`.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
