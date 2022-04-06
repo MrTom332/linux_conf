@@ -5,6 +5,7 @@
 
 1. **[Introduccion](#1-introduccion)**
 2. **[Primeros comandos](#2-primeros-comandos)**
+   - 2.1. [Que ip tengo?](#31-que-ip-tengo)
 3. **[Configurar ip estatica](#3-configurar-ip-estatica)**
    - 3.1. [Que ip tengo?](#31-que-ip-tengo)
    - 3.2. [Cambiar ip](#32-cambiar-ip)
@@ -105,9 +106,9 @@ sudo chmod 664 /archivo/en/cuestion
 
 Como identificar los números y saber que conjunto de permisos estamos dando? Muy fácil, lo aremos sumando los siguientes números que te mostraré a continuación.
 
-4 - Lectura
-2 - Escritura
-1 - Ejecución
+- 4 Lectura
+- 2 Escritura
+- 1 Ejecución
 
 Sumando estos números obtendremos toda la lista de permisos combinados, ej. queremos permisos de lectura y escritura pues sumaremos 4 + 2 lo que nos dará 6
 
