@@ -5,32 +5,32 @@
 
 1. **[Introduccion](#1-introduccion)**
 2. **[Primeros comandos](#2-primeros-comandos)**
-3. [Configurar ip estatica](#3-configurar-ip-estatica)
+3. **[Configurar ip estatica](#3-configurar-ip-estatica)**
    - 3.1. [Que ip tengo?](#31-que-ip-tengo)
    - 3.2. [Cambiar ip](#32-cambiar-ip)
    - 3.3. [Importante❗](#33-importante)
-4. [Configurar claves RSA para la conexión SSH (Opcional)](#4-configurar-claves-rsa-para-la-conexión-ssh-opcional)
+4. **[Configurar claves RSA para la conexión SSH (Opcional)](#4-configurar-claves-rsa-para-la-conexión-ssh-opcional)**
    - 4.1. [Generar el par de claves 🔐](#41-generar-el-par-de-claves-)
    - 4.2. [Ahora como ingresamos desde otro equipo con esta clave ❓](#42-ahora-como-ingresamos-desde-otro-equipo-con-esta-clave-)
      - 4.2.1. [PowerShell](#421-powershell)
      - 4.2.2. [Putty y WinSCP](#422-putty-y-winscp)
    - 4.3. [Por último desactivar la autenticación con contraseña de SSH](#43-por-último-desactivar-la-autenticación-con-contraseña-de-ssh)
-5. [Configura laptop para cuando cierres la tapa no se suspenda (Opcional) 💻](#5-configura-laptop-para-cuando-cierres-la-tapa-no-se-suspenda-opcional-)
-6. [Formateo y montado de unidad externa (Opcional)](#6-formateo-y-montado-de-unidad-externa-opcional)
+5. **[Configura laptop para cuando cierres la tapa no se suspenda (Opcional) 💻](#5-configura-laptop-para-cuando-cierres-la-tapa-no-se-suspenda-opcional-)**
+6. **[Formateo y montado de unidad externa (Opcional)](#6-formateo-y-montado-de-unidad-externa-opcional)**
    - 6.1. [Como formateo mi disco?](#61-como-formateo-mi-disco)
    - 6.2. [Como montar esta nueva unidad en una carpeta?](#62-como-montar-esta-nueva-unidad-en-una-carpeta)
-7. [Instalar apache2](#7-instalar-apache2)
+7. **[Instalar apache2](#7-instalar-apache2)**
    - 7.1. [Logs (OPCIONAL)](#71-logs-opcional)
    - 7.2. [Listado de directorios (OPCIONAL)](#72-listado-de-directorios-opcional)
    - 7.3. [Instalacion y configuracion de ModEvasive (OPCIONAL PERO NO TANTO)](#73-instalacion-y-configuracion-de-modevasive-opcional-pero-no-tanto)
-8. [Instalar mysql 💾](#8-instalar-mysql-)
+8. **[Instalar mysql 💾](#8-instalar-mysql-)**
    - 8.1. [Ajustar autenticación y privilegios de usuarios (OPCIONAL)](#81-ajustar-autenticación-y-privilegios-de-usuarios-opcional)
    - 8.2. [Ajustar nivel de validación de contraseña (OPCIONAL)](#82-ajustar-nivel-de-validación-de-contraseña-opcional)
    - 8.3. [Cambiar carpeta de guardado para las bases de datos (OPCIONAL)](#83-cambiar-carpeta-de-guardado-para-las-bases-de-datos-opcional)
-9. [Instalar php para apache2](#9-instalar-php-para-apache2)
+9. **[Instalar php para apache2](#9-instalar-php-para-apache2)**
    - 9.1. [Aumentar buffer para archivos de subida y POST (OPCIONAL)](#91-aumentar-buffer-para-archivos-de-subida-y-post-opcional)
-10. [Https 🔑](#10-https-)
-11. [Fin 👏👏👏🎊🎊🎊](#11-fin-)
+10. **[Https 🔑](#10-https-)**
+11. **[Fin 👏👏👏🎊🎊🎊](#11-fin-)**
 
 
 <!--############################################################################################################-->
