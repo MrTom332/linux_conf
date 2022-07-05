@@ -780,6 +780,23 @@ Instalar complementos de php para manejar strings
 sudo apt-get install php-mbstring
 ```
 
+Instalar complementos de php para usar 'DOMImplementation'
+```
+sudo apt-get install php-xml
+```
+
+Mejore las capacidades de GD para manejar más formatos de imagen especificando la opción de configuración
+```
+sudo apt-get install php7.4-gd
+```
+Verifique su version de php para instalar la versión correcta
+
+Recuerda es necesario reiniciar apache para que PHP empiece a funcionar
+
+```
+sudo systemctl restart apache2
+```
+
 ### 9.1. Aumentar buffer para archivos de subida y POST (OPCIONAL)
 
 Si piensas permitir que se suban archivos a tu servidor a través de PHP, seguramente con el máximo tamaño permitido por default te quede un poco corto, así que veamos como solucionar eso. (La idea es entrar a `php.ini puede que tu ruta sea distinta dependiendo la versión de PHP entre otras cosas
